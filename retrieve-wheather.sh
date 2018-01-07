@@ -1,3 +1,9 @@
+#!/bin/sh
+
+db_user=$1
+shift
+db_pass=$1
+
 #
 # Dit script is bedoelt om actuele waarnemingen van de KNMI website te halen.
 
@@ -35,7 +41,7 @@ query='insert into Measurement (sensorStationId, tsMeasured, temperature, humidi
 echo "query: ${query}"
 
 # Store the data into the database
-mysql -u climateuser --password=adm_climateuser -e "${query}" climate
+mysql -u ${db_user} --password=${db_pass} -e "${query}" climate
 
 # Controleer of het statement juist is uitgevoerd
 if [ "$?" = "0" ]; then
